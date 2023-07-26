@@ -1,0 +1,145 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'sirukota';
+  src: url('Sirukota.ttf') format('truetype');
+}
+
+body {
+  color: salmon;
+  font-family: 'sirukota', sans-serif;
+}
+
+h1 {
+  font-family: sirukota;
+  font-size: 50px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 30px;
+}
+.game {
+  padding: 20px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: beige
+}
+
+#board {
+  width: 750px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#overview {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#player1 {
+  margin-right: 80px;
+}
+
+#player2 {
+  margin-left: 80px;
+}
+
+#white {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  background-color: white; 
+  border-radius: 50%;
+  margin-left: 80px;
+  margin-top: 10px;
+  box-shadow: 8px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+#black {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  background-color: #6d765b; 
+  border-radius: 50%;
+  margin-right: 86px;
+  margin-top: 10px;
+  box-shadow: 8px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+#edge {
+  border-radius: 10px 0 0 0;
+}
+
+#topright {
+  border-radius: 0 10px 0 0;
+}
+
+#botright {
+  border-radius: 0 0 10px 0;
+}
+
+#botleft {
+  border-radius: 0 0 0 10px;
+}
+
+.cell {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: salmon;
+  border-top: 2.7px solid;
+  border-left: 2.7px solid;
+}
+
+.cell:nth-child(15n) {
+  border-right: 2.7px solid;
+}
+
+.cell:nth-last-child(-n + 15) {
+  border-bottom: 2.7px solid;
+}
+
+button {
+  padding: 10px, 10px;
+  height: 50px;
+  width: 150px;
+  color: beige;
+  border-radius: 5px;
+  background-color: salmon;
+  font-family: sirukota;
+  font-size: 25px;
+  transform: 200ms;
+  border: none;
+}
+
+
+
+
+
+
+
+
