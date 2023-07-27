@@ -9,20 +9,21 @@
   <title>Document</title>
 </head>
 <body>
-  <div class="game">
+  <div class="game"> 
     <div id="overview">
-      <div class="player">
+      <div class="player" id="leftp">
         <h2 id="player1">Player 1</h2>
-        <div id="black"></div>
+        <div class="piece" id="black" draggable="true"></div>
       </div>
       <h1 id="title">G o m o k u</h1>
-      <div class="player">
+      <div class="player" id="rightp">
         <h2 id="player2">Player 2</h2>
-        <div id="white"></div>
+        <div class="piece" id="white" draggable="true"></div>
       </div>
     </div>
     <div id="board">
       <div class="cell" id="edge"></div>
+      <div class="cell"></div>
       <div class="cell"></div>
       <div class="cell"></div>
       <div class="cell"></div>
@@ -232,7 +233,37 @@
       <div class="cell"></div>
       <div class="cell"></div>
       <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
       <div class="cell" id="botleft"></div>
+      <div class="cell"></div>
       <div class="cell"></div>
       <div class="cell"></div>
       <div class="cell"></div>
@@ -248,7 +279,11 @@
       <div class="cell"></div>
       <div class="cell" id="botright"></div>
     </div>
-    <button id="newgame">New Game</button>
+      <div id="buttons">
+      <button id="end">End Turn</button>
+      <button id="newgame">New Game</button>
+      <button id="surrender">Surrender</button>
+    </div>
   </div>
   
 </body>

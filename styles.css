@@ -34,7 +34,7 @@ h2 {
 }
 
 #board {
-  width: 750px;
+  width: 800px;
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px;
@@ -50,41 +50,47 @@ h2 {
 
 .player {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 }
 
-#player1 {
+#leftp {
   margin-right: 80px;
 }
 
-#player2 {
+#rightp {
   margin-left: 80px;
 }
 
-#white {
-  height: 30px;
+#player1 {
+  margin-right: 20px;
+}
+
+#player2 {
+  margin-left: 20px;
+}
+
+.piece {
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
+  margin-top: 2.7px;
+  margin-left: 2.7px;
+}
+
+#white {
+  color:white;
   background-color: white; 
   border-radius: 50%;
-  margin-left: 80px;
-  margin-top: 10px;
   box-shadow: 8px 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 #black {
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
+  color: #6d765b;
   background-color: #6d765b; 
   border-radius: 50%;
-  margin-right: 86px;
-  margin-top: 10px;
   box-shadow: 8px 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -107,20 +113,52 @@ h2 {
 .cell {
   height: 50px;
   width: 50px;
-  display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   color: salmon;
   border-top: 2.7px solid;
   border-left: 2.7px solid;
 }
 
-.cell:nth-child(15n) {
+.cell:nth-child(16n) {
   border-right: 2.7px solid;
 }
 
-.cell:nth-last-child(-n + 15) {
+.cell:nth-last-child(-n + 16) {
   border-bottom: 2.7px solid;
+}
+
+#buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#surrender {
+  margin-left: 40px; 
+  padding: 10px, 10px;
+  height: 40px;
+  width: 120px;
+  color: beige;
+  border-radius: 5px;
+  background-color: salmon;
+  font-family: sirukota;
+  font-size: 22px;
+  transform: 200ms;
+}
+
+#end {
+  margin-right: 40px;
+  padding: 10px, 10px;
+  height: 40px;
+  width: 120px;
+  color: beige;
+  border-radius: 5px;
+  background-color: salmon;
+  font-family: sirukota;
+  font-size: 20px;
+  transform: 200ms;
 }
 
 button {
@@ -129,11 +167,16 @@ button {
   width: 150px;
   color: beige;
   border-radius: 5px;
-  background-color: salmon;
+  background-color: #6d765b;
   font-family: sirukota;
   font-size: 25px;
   transform: 200ms;
   border: none;
+  cursor: pointer;
+}
+
+.highlight {
+  background-color: #C4A484;
 }
 
 
