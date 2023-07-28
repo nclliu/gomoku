@@ -67,7 +67,7 @@ h2 {
 }
 
 #player2 {
-  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .piece {
@@ -179,6 +179,9 @@ button {
   background-color: #C4A484;
 }
 
+.highlightp {
+  text-shadow: 8px 2px 8px rgb(252, 192, 41);
+}
 
 
 
