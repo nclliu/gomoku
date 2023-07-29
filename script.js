@@ -58,6 +58,8 @@ function restart(e) {
   });
   black.setAttribute('draggable', 'true');
   white.setAttribute('draggable', 'false');
+  player1.classList.add('highlightp')
+  player2.classList.remove('highlightp')
   dragelement=null
 }
 
@@ -74,6 +76,8 @@ function giveup(e){
   });
   black.setAttribute('draggable', 'true');
   white.setAttribute('draggable', 'false');
+  player1.classList.add('highlightp')
+  player2.classList.remove('highlightp')
   dragelement=null
 }
 
