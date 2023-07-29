@@ -78,7 +78,7 @@ function giveup(e){
 }
 
 function next(e) {
-  if (!dragelement) {
+  if (!endcell) {
     alert('cannot end turn without placing a piece down')
   }
   else {
