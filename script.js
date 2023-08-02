@@ -28,6 +28,11 @@ function dragStart(e) {
   dragelement = e.target.cloneNode(true);
   dragelement.classList.remove('starterw')
   dragelement.classList.remove('starterb')
+  if (player.id === 'player2') {
+    white.setAttribute('draggable', 'false');
+  } else {
+    black.setAttribute('draggable', 'false');
+  }
 }
 
 function dragDrop(e) {
@@ -89,13 +94,11 @@ function next(e) {
     console.log(player.id);
     if (player.id === 'player2') {
       black.setAttribute('draggable', 'true');
-      white.setAttribute('draggable', 'false');
       player1.classList.add('highlightp')
       player2.classList.remove('highlightp')
       player = player1;
     } else {
       white.setAttribute('draggable', 'true');
-      black.setAttribute('draggable', 'false');
       player2.classList.add('highlightp')
       player1.classList.remove('highlightp')
       player = player2;
@@ -104,6 +107,7 @@ function next(e) {
     endcell.removeEventListener('drop', dragDrop)
     endcell.removeEventListener('dragenter', dragEnter)
     dragelement=null
+    endcell=null
   }
 }
 
