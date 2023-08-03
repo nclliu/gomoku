@@ -6,6 +6,36 @@ const black = document.querySelector('.starterb');
 const endb = document.querySelector('#end')
 const newb = document.querySelector('#newgame')
 const surrender = document.querySelector('#surrender')
+const join = document.querySelector('#join')
+
+let user;
+
+const socket = io();
+
+join.addEventListener("click", function(){
+  user = document.getElementById("name").value
+  if(user==null || user=='') {
+    alert("please enter a name!")
+  }
+  else {
+    console.log('sent')
+    socket.emit("join", {name: user})
+  }
+})
+
+socket.on("join", (e) => {
+  player1.classList.remove('hidden')
+  player2.classList.remove('hidden')
+  white.classList.remove('hidden')
+  black.classList.remove('hidden')
+  endb.classList.remove('hidden')
+  newb.classList.remove('hidden')
+  surrender.classList.remove('hidden')
+  cells.forEach(cell => {
+    cell.classList.remove('hidden')
+  })
+  join.classList.add('hidden')
+})
 
 white.addEventListener('dragstart', dragStart);
 black.addEventListener('dragstart', dragStart);
