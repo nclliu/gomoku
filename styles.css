@@ -35,6 +35,12 @@ h2 {
   display: none;
 }
 
+#loader img {
+  width:250px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
 #join {
   height: 35px;
   width: 80px;

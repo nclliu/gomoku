@@ -7,6 +7,7 @@ const endb = document.querySelector('#end')
 const newb = document.querySelector('#newgame')
 const surrender = document.querySelector('#surrender')
 const join = document.querySelector('#join')
+const loader = document.querySelector('#loader')
 
 let user;
 
@@ -18,6 +19,7 @@ join.addEventListener("click", function(){
     alert("please enter a name!")
   }
   else {
+    loader.classList.remove('hidden')
     console.log('sent')
     socket.emit("join", {name: user})
   }
@@ -34,6 +36,7 @@ socket.on("join", (e) => {
   cells.forEach(cell => {
     cell.classList.remove('hidden')
   })
+  loader.classList.add('hidden')
   join.classList.add('hidden')
 })
 
