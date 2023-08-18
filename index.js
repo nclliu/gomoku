@@ -41,6 +41,9 @@ io.on("connection", (socket) => {
       }
     }
   })
+  socket.on("elementDropped", ({ cellId, elementId, playerName }) => {
+    socket.broadcast.emit("elementDropped", { cellId, elementId, playerName });
+  });
 })
 
 app.get("/", (req, res) => {

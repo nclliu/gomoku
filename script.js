@@ -20,6 +20,7 @@ join.addEventListener("click", function(){
   }
   else {
     loader.classList.remove('hidden')
+    join.removeEventListener("click")
     console.log('sent')
     socket.emit("join", {name: user})
   }
@@ -38,6 +39,18 @@ socket.on("join", (e) => {
   })
   loader.classList.add('hidden')
   join.classList.add('hidden')
+})
+
+socket.on('elementDropped', ({cellId}) => {
+  if(player == player1) {
+    cellId.appendChild(white)
+  }
+
+  if (cell && element) {
+    cell.appendChild(element);
+  }
+  
+  console.log(`Player ${playerName} dropped element into cell ${cellId}`);
 })
 
 white.addEventListener('dragstart', dragStart);
@@ -74,6 +87,7 @@ function dragDrop(e) {
   e.target.appendChild(dragelement);
   console.log(e.target);
   endcell=e.target
+  socket.emit("elementDropped", { cell: endcell, playerName: user})
 }
 
 function dragOver(e) {
