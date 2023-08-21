@@ -10,6 +10,22 @@ const join = document.querySelector('#join')
 const loader = document.querySelector('#loader')
 
 let user;
+let dragelement;
+let player=player1;
+let endcell;
+
+white.addEventListener('dragstart', dragStart);
+black.addEventListener('dragstart', dragStart);
+newb.addEventListener('click', restart)
+surrender.addEventListener('click', giveup);
+endb.addEventListener('click', next)
+
+cells.forEach(cell => {
+  cell.addEventListener('drop', dragDrop);
+  cell.addEventListener('dragover', dragOver);
+  cell.addEventListener('dragenter', dragEnter);
+  cell.addEventListener('dragleave', dragLeave);
+});
 
 const socket = io();
 
@@ -23,6 +39,7 @@ join.addEventListener("click", function(){
     console.log('sent')
     socket.emit("join", {name: user})
   }
+  join.removeEventListener("click")
 })
 
 socket.on("join", (e) => {
@@ -39,35 +56,6 @@ socket.on("join", (e) => {
   loader.classList.add('hidden')
   join.classList.add('hidden')
 })
-
-socket.on('elementDropped', ({cellId}) => {
-  if(player == player1) {
-    cellId.appendChild(white)
-  }
-
-  if (cell && element) {
-    cell.appendChild(element);
-  }
-  
-  console.log(`Player ${playerName} dropped element into cell ${cellId}`);
-})
-
-white.addEventListener('dragstart', dragStart);
-black.addEventListener('dragstart', dragStart);
-newb.addEventListener('click', restart)
-surrender.addEventListener('click', giveup);
-endb.addEventListener('click', next)
-
-cells.forEach(cell => {
-  cell.addEventListener('drop', dragDrop);
-  cell.addEventListener('dragover', dragOver);
-  cell.addEventListener('dragenter', dragEnter);
-  cell.addEventListener('dragleave', dragLeave);
-});
-
-let dragelement;
-let player=player1;
-let endcell;
 
 function dragStart(e) {
   dragelement = e.target.cloneNode(true);
@@ -86,7 +74,6 @@ function dragDrop(e) {
     black.setAttribute('draggable', 'false');
   }
   endcell=e.target
-  socket.emit("elementDropped", { cell: endcell, playerName: user})
 }
 
 function dragOver(e) {
@@ -139,23 +126,38 @@ function next(e) {
     alert('cannot end turn without placing a piece down')
   }
   else {
-    console.log(player.id);
-    if (player.id === 'player2') {
-      black.setAttribute('draggable', 'true');
-      player1.classList.add('highlightp')
-      player2.classList.remove('highlightp')
-      player = player1;
-    } else {
-      white.setAttribute('draggable', 'true');
-      player2.classList.add('highlightp')
-      player1.classList.remove('highlightp')
-      player = player2;
-    }
+    console.log("helloo")
+    socket.emit("next", {end: endcell.id, elem: dragelement.id})
     dragelement.setAttribute('draggable', 'false')
     endcell.removeEventListener('drop', dragDrop)
     endcell.removeEventListener('dragenter', dragEnter)
     dragelement=null
     endcell=null
   }
+  console.log("emitted")
 }
+
+socket.on("next", ({end, elem}) => {
+  console.log(end)
+  endcell = document.getElementById(end)
+  dragelement = document.getElementById(elem).cloneNode(true)
+  endcell.appendChild(dragelement)
+  if (player.id === 'player2') {
+    black.setAttribute('draggable', 'true');
+    player1.classList.add('highlightp')
+    player2.classList.remove('highlightp')
+    player = player1;
+  } else {
+    white.setAttribute('draggable', 'true');
+    player2.classList.add('highlightp')
+    player1.classList.remove('highlightp')
+    player = player2;
+  }
+  dragelement.setAttribute('draggable', 'false')
+  endcell.removeEventListener('drop', dragDrop)
+  endcell.removeEventListener('dragenter', dragEnter)
+  dragelement=null
+  endcell=null
+  console.log("nextturn")
+})
 

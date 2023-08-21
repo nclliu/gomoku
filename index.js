@@ -12,6 +12,7 @@ app.use(express.static(path.resolve("")))
 
 let arr=[];
 let players=[]
+let endcell
 
 io.on("connection", (socket) => {
   socket.on("join", (e) => {
@@ -41,9 +42,14 @@ io.on("connection", (socket) => {
       }
     }
   })
-  socket.on("elementDropped", ({ cellId, elementId, playerName }) => {
-    socket.broadcast.emit("elementDropped", { cellId, elementId, playerName });
-  });
+  socket.on("next", (data)=> {
+    console.log(data.end); // This should log the endcell ID
+    console.log(data.elem); // This should log the dragelement ID
+    if (data.end && data.elem) {
+      socket.broadcast.emit("next", {end: data.end, elem: data.elem});
+      console.log("senttext");
+    }
+  })
 })
 
 app.get("/", (req, res) => {
