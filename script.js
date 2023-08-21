@@ -20,7 +20,6 @@ join.addEventListener("click", function(){
   }
   else {
     loader.classList.remove('hidden')
-    join.removeEventListener("click")
     console.log('sent')
     socket.emit("join", {name: user})
   }
@@ -74,11 +73,6 @@ function dragStart(e) {
   dragelement = e.target.cloneNode(true);
   dragelement.classList.remove('starterw')
   dragelement.classList.remove('starterb')
-  if (player.id === 'player2') {
-    white.setAttribute('draggable', 'false');
-  } else {
-    black.setAttribute('draggable', 'false');
-  }
 }
 
 function dragDrop(e) {
@@ -86,6 +80,11 @@ function dragDrop(e) {
   e.target.classList.remove('highlight');
   e.target.appendChild(dragelement);
   console.log(e.target);
+  if (player.id === 'player2') {
+    white.setAttribute('draggable', 'false');
+  } else {
+    black.setAttribute('draggable', 'false');
+  }
   endcell=e.target
   socket.emit("elementDropped", { cell: endcell, playerName: user})
 }
