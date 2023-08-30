@@ -33,7 +33,8 @@ io.on("connection", (socket) => {
         }
         let obj = {
           p1: player1,
-          p2: player2
+          p2: player2,
+          sum: 0
         }
         players.push(obj)
         arr.splice(0,2)
@@ -43,10 +44,13 @@ io.on("connection", (socket) => {
     }
   })
   socket.on("next", (data)=> {
-    console.log(data.end); // This should log the endcell ID
-    console.log(data.elem); // This should log the dragelement ID
+    if (data.elem == "black") {
+      let tochange = players.find(obj=>obj.player1.p1 === data.name)
+      tochange.p2.p2move = data.end
+      tochange.sum++
+    }
     if (data.end && data.elem) {
-      socket.broadcast.emit("next", {end: data.end, elem: data.elem});
+      socket.broadcast.emit("next", {end: data.end, elem: data.elem, players: players});
       console.log("senttext");
     }
   })

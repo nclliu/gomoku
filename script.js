@@ -11,8 +11,10 @@ const loader = document.querySelector('#loader')
 
 let user;
 let dragelement;
-let player=player1;
+let player = "black";
 let endcell;
+let opponent;
+let value;
 
 white.addEventListener('dragstart', dragStart);
 black.addEventListener('dragstart', dragStart);
@@ -39,7 +41,7 @@ join.addEventListener("click", function(){
     console.log('sent')
     socket.emit("join", {name: user})
   }
-  join.removeEventListener("click")
+  join.removeEventListener("click", arguments.callee)
 })
 
 socket.on("join", (e) => {
@@ -55,6 +57,10 @@ socket.on("join", (e) => {
   })
   loader.classList.add('hidden')
   join.classList.add('hidden')
+  let players = e.players
+  const foundObj = players.find(obj=> obj.player1.p1=='${user}'|| obj.player2.p2 == '${user}')
+  foundObj.player1.p1 == '${user}' ? opponent = foundObj.player2.p2 : opponent = foundObj.player1.p1
+  foundObj.player1.p1 == '${user}' ? value = foundObj.player2.p2color : value = foundObj.player1.p1color 
 })
 
 function dragStart(e) {
@@ -68,7 +74,7 @@ function dragDrop(e) {
   e.target.classList.remove('highlight');
   e.target.appendChild(dragelement);
   console.log(e.target);
-  if (player.id === 'player2') {
+  if (player.id === 'white') {
     white.setAttribute('draggable', 'false');
   } else {
     black.setAttribute('draggable', 'false');
@@ -103,7 +109,7 @@ function restart(e) {
 }
 
 function giveup(e){
-  if (player.id === 'player1') {
+  if (player.id === 'black') {
     console.log('p2won!');
   } else {
     console.log('p1won!');
@@ -126,8 +132,7 @@ function next(e) {
     alert('cannot end turn without placing a piece down')
   }
   else {
-    console.log("helloo")
-    socket.emit("next", {end: endcell.id, elem: dragelement.id})
+    socket.emit("next", {end: endcell.id, elem: dragelement.id, name:user})
     dragelement.setAttribute('draggable', 'false')
     endcell.removeEventListener('drop', dragDrop)
     endcell.removeEventListener('dragenter', dragEnter)
@@ -142,16 +147,16 @@ socket.on("next", ({end, elem}) => {
   endcell = document.getElementById(end)
   dragelement = document.getElementById(elem).cloneNode(true)
   endcell.appendChild(dragelement)
-  if (player.id === 'player2') {
+  if (player === 'white') {
     black.setAttribute('draggable', 'true');
     player1.classList.add('highlightp')
     player2.classList.remove('highlightp')
-    player = player1;
+    player = "black";
   } else {
     white.setAttribute('draggable', 'true');
     player2.classList.add('highlightp')
     player1.classList.remove('highlightp')
-    player = player2;
+    player = "white";
   }
   dragelement.setAttribute('draggable', 'false')
   endcell.removeEventListener('drop', dragDrop)
