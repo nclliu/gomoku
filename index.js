@@ -45,7 +45,7 @@ io.on("connection", (socket) => {
   })
   socket.on("next", (data)=> {
     if (data.elem == "black") {
-      let tochange = players.find(obj=>obj.player1.p1 === data.name)
+      let tochange = players.find(obj=>obj.p1.p1 === data.name)
       tochange.p2.p2move = data.end
       tochange.sum++
     }

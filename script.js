@@ -128,6 +128,17 @@ function giveup(e){
 }
 
 function next(e) {
+  if (player === 'white') {
+    black.setAttribute('draggable', 'true');
+    player1.classList.add('highlightp')
+    player2.classList.remove('highlightp')
+    player = "black";
+  } else {
+    white.setAttribute('draggable', 'true');
+    player2.classList.add('highlightp')
+    player1.classList.remove('highlightp')
+    player = "white";
+  }
   if (!endcell) {
     alert('cannot end turn without placing a piece down')
   }
@@ -142,7 +153,7 @@ function next(e) {
   console.log("emitted")
 }
 
-socket.on("next", ({end, elem}) => {
+socket.on("next", ({end, elem, name}) => {
   console.log(end)
   endcell = document.getElementById(end)
   dragelement = document.getElementById(elem).cloneNode(true)
